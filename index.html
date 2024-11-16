@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Website Of Drawing</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        canvas {
+            border: 2px solid white;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1>Welcome!</h1> 
+        <p>This is The Website Of Drawing (TWOD)!</p>
+        <p>You see, I made this because I wanted to.</p>
+        <p>You know what? I'm feeling nice. This IS The Website Of Drawing, too.</p>
+        <p>I'll let you do drawing right here, right now.</p>
+        <p>Yeah, suprising!</p>
+        <h1>The Drawing Palace</h1>
+
+        <canvas id="drawingCanvas" width="1000" height="500"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let drawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', (e) => {
+            drawing = true;
+            lastX = e.offsetX;
+            lastY = e.offsetY;
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            drawing = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (drawing) {
+                const currentX = e.offsetX;
+                const currentY = e.offsetY;
+
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(currentX, currentY);
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.closePath();
+
+                lastX = currentX;
+                lastY = currentY;
+            }
+        });
+    </script>
+    <p>Tip: Refresh to restart.</p>
+    <br>
+    <p>Credits: Saturn</p>
+</body>
+</html>
